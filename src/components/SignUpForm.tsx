@@ -50,11 +50,7 @@ export default function SignUpForm() {
 
               <FormControl id="username" isInvalid={!!errors.username}>
                 <FormLabel>Username</FormLabel>
-                <Input
-                  variant="filled"
-                  type="username"
-                  {...register("username")}
-                />
+                <Input variant="filled" type="text" {...register("username")} />
                 <FormValidationState
                   formState={formState}
                   name="username"
