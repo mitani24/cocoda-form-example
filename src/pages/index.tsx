@@ -1,10 +1,10 @@
-import { Flex } from "@chakra-ui/react"
-import LoginForm from "@/components/LoginForm"
+import { Center } from "@chakra-ui/react"
+import SignUpForm from "@/components/SignUpForm"
 
 export default function Home() {
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
-      <LoginForm boxShadow="xl" />
-    </Flex>
+    <Center height="100vh" bg="gray.100">
+      <SignUpForm />
+    </Center>
   )
 }
