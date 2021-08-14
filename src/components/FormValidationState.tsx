@@ -1,5 +1,5 @@
 import { CheckCircleIcon } from "@chakra-ui/icons"
-import { List, ListIcon, ListItem } from "@chakra-ui/react"
+import { Collapse, List, ListIcon, ListItem } from "@chakra-ui/react"
 import { FieldError, FormState } from "react-hook-form"
 import { ZodNumber, ZodObject, ZodRawShape, ZodString } from "zod"
 
@@ -17,10 +17,7 @@ export default function FormValidationState<
 
   const isDirty = !!dirtyFields[name]
   const isTouched = !!touchedFields[name]
-
-  if (!isDirty && !isTouched) {
-    return null
-  }
+  const isOpen = isDirty || isTouched
 
   const zodType = schema.shape[name as string]
 
@@ -57,16 +54,18 @@ export default function FormValidationState<
   })
 
   return (
-    <List px={4} py={2} fontSize="sm" spacing={1}>
-      {validationResults.map((result) => (
-        <ListItem
-          key={result.message}
-          color={result.valid ? "teal.400" : "gray.400"}
-        >
-          <ListIcon as={CheckCircleIcon} />
-          {result.message}
-        </ListItem>
-      ))}
-    </List>
+    <Collapse in={isOpen} animateOpacity>
+      <List px={4} py={2} fontSize="sm" spacing={1}>
+        {validationResults.map((result) => (
+          <ListItem
+            key={result.message}
+            color={result.valid ? "teal.400" : "gray.400"}
+          >
+            <ListIcon as={CheckCircleIcon} />
+            {result.message}
+          </ListItem>
+        ))}
+      </List>
+    </Collapse>
   )
 }
